@@ -2,7 +2,6 @@ package com.moneywatcher.model;
 
 public class Expense {
   private int id;
-  private int userId;
   private String title;
   private double amount;
   private String description;
@@ -16,14 +15,6 @@ public class Expense {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public int getUserId() {
-    return userId;
-  }
-
-  public void setUserId(int userId) {
-    this.userId = userId;
   }
 
   public String getTitle() {
