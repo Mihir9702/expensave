@@ -9,7 +9,7 @@ public interface ExpenseDao {
 
   Expense getExpenseById(int id);
 
-  Expense getExpenseByDate(int month, int day, int year);
+  Expense getExpenseByDate(int month, int day, int year, int userId);
 
   void addExpense(Expense expense);
 
