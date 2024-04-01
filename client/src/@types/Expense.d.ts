@@ -2,5 +2,8 @@ interface Expense {
 	id: number
 	title: string
 	amount: number
-	date: string
+	description?: string
+	day: number
+	month: number
+	year: number
 }
