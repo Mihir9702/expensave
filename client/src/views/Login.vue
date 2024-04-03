@@ -1,54 +1,79 @@
 <template>
-	<form
-		class="border-2 w-1/2 m-auto"
-		@submit.prevent="login"
-	>
-		<div class="flex flex-col m-4">
-			<label for="username">Username</label>
-			<input
-				type="text"
-				id="username"
-				v-model="username"
-			/>
-		</div>
-
-		<div class="flex flex-col m-4">
-			<label for="password">Password</label>
-			<input
-				type="password"
-				id="password"
-				v-model="password"
-			/>
-		</div>
-
-		<!-- submit button -->
-		<div class="flex justify-center m-4">
-			<button type="submit">Login</button>
-		</div>
-	</form>
+  <div id="login">
+    <form v-on:submit.prevent="login">
+      <h1>Please Sign In</h1>
+      <div role="alert" v-if="invalidCredentials">
+        Invalid username and password!
+      </div>
+      <div role="alert" v-if="this.$route.query.registration">
+        Thank you for registering, please sign in.
+      </div>
+      <div class="form-input-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          v-model="user.username"
+          required
+          autofocus
+        />
+      </div>
+      <div class="form-input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model="user.password" required />
+      </div>
+      <button type="submit">Sign in</button>
+      <p>
+        <router-link v-bind:to="{ name: 'register' }"
+          >Need an account? Sign up.</router-link
+        >
+      </p>
+    </form>
+  </div>
 </template>
 
-<script setup lang="ts">
-import { AuthService } from '../services/AuthService'
-import { useRouter } from 'vue-router'
+<script>
+import authService from "../services/AuthService";
 
-const username = ''
-const password = ''
+export default {
+  components: {},
+  data() {
+    return {
+      user: {
+        username: "",
+        password: "",
+      },
+      invalidCredentials: false,
+    };
+  },
+  methods: {
+    login() {
+      authService
+        .login(this.user)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            this.$store.commit("SET_USER", response.data.user);
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
 
-const router = useRouter()
-
-async function login(event: Event) {
-	event.preventDefault()
-
-	const username = (event.target as HTMLFormElement).username.value
-	const password = (event.target as HTMLFormElement).password.value
-
-	try {
-		const response = await AuthService.login(username, password)
-		console.log(response)
-		router.push('/dashboard')
-	} catch (error) {
-		console.error(error)
-	}
-}
+          if (response.status === 401) {
+            this.invalidCredentials = true;
+          }
+        });
+    },
+  },
+};
 </script>
+
+<style scoped>
+.form-input-group {
+  margin-bottom: 1rem;
+}
+label {
+  margin-right: 0.5rem;
+}
+</style>
