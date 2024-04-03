@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import com.expensave.tracker.exception.DaoException;
 import com.expensave.tracker.model.Expense;
 
+@Component
 public class JdbcExpenseDao implements ExpenseDao {
 
   private JdbcTemplate jdbcTemplate;

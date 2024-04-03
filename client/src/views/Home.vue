@@ -3,7 +3,8 @@
     <div v-if="isLoading">
       <Loader />
     </div>
-    <div v-else></div>
+    <div v-else>
+    </div>
   </div>
 </template>
 

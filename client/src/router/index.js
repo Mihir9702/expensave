@@ -27,7 +27,7 @@ const routes = [
 
   {
     path: "/login",
-    name: "login",
+    name: "Login",
     component: Login,
     meta: {
       requiresAuth: false
@@ -36,7 +36,7 @@ const routes = [
 
   {
     path: "/logout",
-    name: "logout",
+    name: "Logout",
     component: Logout,
     meta: {
       requiresAuth: false
@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: "/signup",
-    name: "signup",
+    name: "Signup",
     component: Signup,
     meta: {
       requiresAuth: false
@@ -68,7 +68,7 @@ router.beforeEach((to) => {
 
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    return { name: "login" }
+    return { name: "Login" }
   }
   // Otherwise, do nothing and they'll go to their next destination
 })
