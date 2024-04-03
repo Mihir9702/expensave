@@ -1,4 +1,4 @@
-package com.moneywatcher.controllers;
+package com.expensave.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/expenses")
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
-public class Controller {
+public class ExpenseController {
 
   private UserDao userDao;
   private ExpenseDao expenseDao;
 
-  public Controller(UserDao userDao, ExpenseDao expenseDao) {
+  public ExpenseController(UserDao userDao, ExpenseDao expenseDao) {
     this.userDao = userDao;
     this.expenseDao = expenseDao;
   }

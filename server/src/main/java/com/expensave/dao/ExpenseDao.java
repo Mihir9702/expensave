@@ -1,8 +1,8 @@
-package com.moneywatcher.dao;
+package com.expensave.dao;
 
 import java.util.List;
 
-import com.moneywatcher.model.Expense;
+import com.expensave.model.Expense;
 
 public interface ExpenseDao {
   List<Expense> getExpensesByUserId(int userId);

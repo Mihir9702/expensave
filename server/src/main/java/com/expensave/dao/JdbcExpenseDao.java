@@ -1,16 +1,16 @@
-package com.moneywatcher.dao;
+package com.expensave.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.moneywatcher.model.Expense;
+import com.expensave.model.Expense;
 
 public class JdbcExpenseDao implements ExpenseDao {
 
   private JdbcTemplate jdbcTemplate;
 
-  public JdbcExpenseDao(DataSource dataSource) {
-    jdbcTemplate = new JdbcTemplate(dataSource);
+  public JdbcExpenseDao(JdbcTemplate jdbcTemplate) {
+    this.jdbcTemplate = jdbcTemplate;
   }
 
   @Override
