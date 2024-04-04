@@ -17,7 +17,7 @@ Expensave is a daily expense tracker application designed to help you manage you
   - Vuex: State management library for Vue.js applications.
   - Vue Router: Official router for Vue.js applications.
   - Axios: Promise-based HTTP client for making API requests.
-  - BootstrapVue: Bootstrap components for Vue.js.
+  - Tailwind CSS: A utility-first CSS framework for building custom designs.
   
 - **Backend**:
   - Java Spring Boot: A powerful framework for building Java-based web applications.
