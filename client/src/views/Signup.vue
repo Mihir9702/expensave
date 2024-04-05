@@ -1,12 +1,18 @@
 <template>
-  <form v-on:submit.prevent="signup">
-    <h1>Create Account</h1>
+  <form
+    v-on:submit.prevent="signup"
+    class="border-2 border-green-500 rounded-md w-fit m-auto p-6"
+  >
+    <h1 class="text-2xl text-center">Create Account</h1>
+
     <div role="alert" v-if="registrationErrors">
       {{ registrationErrorMsg }}
     </div>
-    <div class="form-input-group">
+
+    <div class="flex gap-4 mt-4">
       <label for="username">Username</label>
       <input
+        class="border-2 border-green-500 outline-none bg-transparent"
         type="text"
         id="username"
         v-model="user.username"
@@ -14,24 +20,44 @@
         autofocus
       />
     </div>
-    <div class="form-input-group">
+
+    <div class="flex gap-5 mt-4">
       <label for="password">Password</label>
-      <input type="password" id="password" v-model="user.password" required />
+      <input
+        class="border-2 border-green-500 outline-none bg-transparent"
+        type="password"
+        id="password"
+        v-model="user.password"
+        required
+      />
     </div>
-    <div class="form-input-group">
+
+    <div class="flex gap-5 mt-4">
       <label for="confirmPassword">Confirm Password</label>
       <input
         type="password"
+        class="border-2 border-green-500 outline-none bg-transparent"
         id="confirmPassword"
         v-model="user.confirmPassword"
         required
       />
     </div>
-    <button type="submit">Create Account</button>
-    <p>
-      <router-link v-bind:to="{ name: 'login' }"
-        >Already have an account? Log in.</router-link
+
+    <div class="flex justify-center mt-6">
+      <button
+        type="submit"
+        class="bg-green-400 hover:bg-green-500 transition-all text-lg w-fit px-6 rounded-md text-black py-1"
       >
+        Create Account
+      </button>
+    </div>
+
+    <p>
+      <router-link v-bind:to="{ name: 'Login' }">
+        <p class="text-blue-400 mt-4 hover:underline">
+          Already have an account? Log in.
+        </p>
+      </router-link>
     </p>
   </form>
 </template>

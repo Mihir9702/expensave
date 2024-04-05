@@ -1,7 +1,7 @@
 <template>
   <form
     v-on:submit.prevent="login"
-    class="border-2 border-green-500 w-fit m-auto p-6"
+    class="border-2 border-green-500 rounded-md w-fit m-auto p-6"
   >
     <h1 class="text-2xl text-center">Please Sign In</h1>
 
@@ -13,10 +13,10 @@
       Thank you for registering, please sign in.
     </div>
 
-    <div class="custom-class-name flex gap-4 mt-4">
+    <div class="flex gap-4 mt-4">
       <label for="username">Username:</label>
       <input
-        class="border-2 border-green-500"
+        class="border-2 border-green-500 outline-none bg-transparent"
         type="text"
         id="username"
         v-model="user.username"
@@ -28,7 +28,7 @@
     <div class="flex gap-5 mt-4">
       <label for="password">Password:</label>
       <input
-        class="border-2 border-green-500"
+        class="border-2 border-green-500 outline-none bg-transparent"
         type="password"
         id="password"
         v-model="user.password"
@@ -36,11 +36,20 @@
       />
     </div>
 
-    <button type="submit" class="m-4 bg-green-500 w-full">Sign in</button>
+    <div class="flex justify-center mt-6">
+      <button
+        type="submit"
+        class="bg-green-400 hover:bg-green-500 transition-all text-lg w-fit px-6 rounded-md text-black py-1"
+      >
+        Sign in
+      </button>
+    </div>
 
     <p>
       <router-link v-bind:to="{ name: 'Signup' }">
-        Need an account? Sign up.
+        <p class="text-blue-400 mt-4 hover:underline">
+          Need an account? Sign up.
+        </p>
       </router-link>
     </p>
   </form>
