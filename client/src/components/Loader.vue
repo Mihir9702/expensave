@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-    <img src="../assets/ping_pong_loader.gif" />
+    <img src="" alt="" />
   </div>
 </template>
 
