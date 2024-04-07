@@ -67,10 +67,11 @@ public class JdbcExpenseDao implements ExpenseDao {
 
   @Override
   public void addExpense(Expense expense) {
-    String sql = "INSERT INTO expenses (user_id, title, amount, description, date) VALUES (?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO expenses (user_id, amount, description, date) VALUES (?, ?, ?, ?)";
     try {
       jdbcTemplate.update(sql,
-          expense.getUserId(), expense.getTitle(), expense.getAmount(), expense.getDescription(), expense.getDate());
+          expense.getUserId(), expense.getAmount(),
+          expense.getDescription(), expense.getDate());
     } catch (CannotGetJdbcConnectionException e) {
       throw new DaoException("Unable to connect to server or database", e);
     }
@@ -81,7 +82,8 @@ public class JdbcExpenseDao implements ExpenseDao {
     String sql = "UPDATE expenses SET title = ?, amount = ?, description = ?, date = ? WHERE expense_id = ?";
     try {
       jdbcTemplate.update(sql,
-          expense.getTitle(), expense.getAmount(), expense.getDescription(), expense.getDate(), expense.getId());
+          expense.getAmount(), expense.getDescription(),
+          expense.getDate(), expense.getId());
     } catch (CannotGetJdbcConnectionException e) {
       throw new DaoException("Unable to connect to server or database", e);
     }
@@ -98,12 +100,14 @@ public class JdbcExpenseDao implements ExpenseDao {
   }
 
   private Expense mapRowToExpense(SqlRowSet results) {
-    return new Expense(
-        results.getInt("expense_id"),
-        results.getInt("user_id"),
-        results.getString("title"),
-        results.getDouble("amount"),
-        results.getString("description"),
-        results.getDate("date"));
+    Expense expense = new Expense();
+
+    expense.setId(results.getInt("expense_id"));
+    expense.setUserId(results.getInt("user_id"));
+    expense.setAmount(results.getDouble("amount"));
+    expense.setDescription(results.getString("description"));
+    expense.setDate(results.getDate("date").toLocalDate());
+
+    return expense;
   }
 }

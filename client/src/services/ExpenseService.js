@@ -8,6 +8,10 @@ export default {
 
   getExpense(id) {
     return axios.get(`/expenses/${id}`)
-  }
+  },
+
+  createExpense(data) {
+    return axios.post('/expenses', data)
+  },
 
 }

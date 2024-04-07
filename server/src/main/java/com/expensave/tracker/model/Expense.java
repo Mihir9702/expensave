@@ -1,22 +1,19 @@
 package com.expensave.tracker.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Expense {
   private int id;
   private int userId;
-  private String title;
   private double amount;
   private String description;
-  private Date date;
+  private LocalDate date;
 
   public Expense() {
   }
 
-  public Expense(int id, int userId, String title, double amount, String description, Date date) {
-    this.id = id;
+  public Expense(int userId, double amount, String description, LocalDate date) {
     this.userId = userId;
-    this.title = title;
     this.amount = amount;
     this.description = description;
     this.date = date;
@@ -38,14 +35,6 @@ public class Expense {
     this.userId = userId;
   }
 
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
   public double getAmount() {
     return amount;
   }
@@ -62,11 +51,11 @@ public class Expense {
     this.description = description;
   }
 
-  public Date getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(LocalDate date) {
     this.date = date;
   }
 }

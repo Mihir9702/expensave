@@ -49,6 +49,15 @@ const routes = [
     meta: {
       requiresAuth: false
     }
+  },
+
+  {
+    path: "/create-expense",
+    name: "CreateExpense",
+    component: () => import("../views/CreateExpense.vue"),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
