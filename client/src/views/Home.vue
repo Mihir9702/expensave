@@ -15,10 +15,10 @@
     </div>
 
     <div v-if="showForm" class="bg-white p-4 rounded-md shadow-md m-4">
-      <ExpenseForm :addExpense="addExpense" />
+      <ExpenseForm :createExpense="createExpense" />
     </div>
 
-    <ExpenseTable :expenses="expenses" />
+    <ExpenseTable :expenses="expenses" :deleteExpense="deleteExpense" />
   </div>
 </template>
 
@@ -27,15 +27,6 @@ import Loader from "../components/Loader.vue";
 import expenseService from "../services/ExpenseService";
 import ExpenseForm from "../components/ExpenseForm.vue";
 import ExpenseTable from "../components/ExpenseTable.vue";
-
-async function getExpenses() {
-  try {
-    const response = await expenseService.getExpenses();
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 export default {
   components: {
@@ -53,16 +44,29 @@ export default {
   },
 
   methods: {
-    async addExpense() {
+    async getExpenses() {
       try {
-        await expenseService.addExpense(this.expenseToAdd);
-        this.expenses = await getExpenses();
-        this.expenseToAdd = {
-          date: "",
-          description: "",
-          amount: 0,
-        };
+        const response = await expenseService.getExpenses();
+        return response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async createExpense(expenseToAdd) {
+      try {
+        await expenseService.createExpense(expenseToAdd);
+        this.expenses = await this.getExpenses();
         this.showForm = false;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async deleteExpense(id) {
+      try {
+        await expenseService.deleteExpense(id);
+        this.expenses = await this.getExpenses();
       } catch (error) {
         console.error(error);
       }
@@ -70,7 +74,7 @@ export default {
   },
 
   async created() {
-    this.expenses = await getExpenses();
+    this.expenses = await this.getExpenses();
     this.isLoading = false;
   },
 };

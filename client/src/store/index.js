@@ -1,12 +1,13 @@
 import { createStore as _createStore } from 'vuex'
 import axios from 'axios'
-
+import expenseService from '../services/ExpenseService'
 
 export function createStore(currentToken, currentUser) {
   let store = _createStore({
     state: {
       token: currentToken || '',
-      user: currentUser || {}
+      user: currentUser || {},
+      expenses: [],
     },
 
     mutations: {
@@ -28,7 +29,13 @@ export function createStore(currentToken, currentUser) {
         state.token = ''
         state.user = {}
         axios.defaults.headers.common = {}
-      }
+      },
+
+      SET_EXPENSES(state, id) {
+        expenseService.deleteExpense(id).then(() => { })
+
+        state.expenses = state.expenses.filter(expense => expense.id !== id)
+      },
     },
   })
   return store

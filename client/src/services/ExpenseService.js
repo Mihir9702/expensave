@@ -10,8 +10,16 @@ export default {
     return axios.get(`/expenses/${id}`)
   },
 
-  addExpense(data) {
+  createExpense(data) {
     return axios.post('/expenses', data)
+  },
+
+  updateExpense(id, data) {
+    return axios.put(`/expenses/${id}`, data)
+  },
+
+  deleteExpense(id) {
+    return axios.delete(`/expenses/${id}`)
   },
 
 }

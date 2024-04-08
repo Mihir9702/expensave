@@ -9,7 +9,7 @@ public interface ExpenseDao {
 
   Expense getExpenseById(int id);
 
-  void addExpense(Expense expense);
+  void createExpense(Expense expense);
 
   void updateExpense(Expense expense);
 

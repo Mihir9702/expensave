@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensave.tracker.dao.ExpenseDao;
@@ -23,6 +24,7 @@ import com.expensave.tracker.model.user.User;
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
+@RequestMapping("/expenses")
 public class ExpenseController {
 
   private UserDao userDao;
@@ -33,7 +35,7 @@ public class ExpenseController {
     this.expenseDao = expenseDao;
   }
 
-  @GetMapping("/expenses")
+  @GetMapping
   public List<Expense> getExpensesByUserId(Principal principal) {
     String username = principal.getName();
     User user = userDao.getUserByUsername(username);
@@ -41,25 +43,25 @@ public class ExpenseController {
     return expenseDao.getExpensesByUserId(userId);
   }
 
-  @GetMapping("/expenses/{id}")
-  public Expense getExpenseById(@PathVariable int id) {
-    return expenseDao.getExpenseById(id);
-  }
-
-  @PostMapping("/expenses")
-  public void addExpense(@Valid @RequestBody Expense expense, Principal principal) {
+  @PostMapping
+  public void createExpense(@Valid @RequestBody Expense expense, Principal principal) {
     String username = principal.getName();
     User user = userDao.getUserByUsername(username);
     expense.setUserId(user.getId());
-    expenseDao.addExpense(expense);
+    expenseDao.createExpense(expense);
   }
 
-  @PutMapping("/expenses")
+  @PutMapping
   public void updateExpense(@RequestBody Expense expense) {
     expenseDao.updateExpense(expense);
   }
 
-  @DeleteMapping("/expenses/{id}")
+  @GetMapping("/{id}")
+  public Expense getExpenseById(@PathVariable int id) {
+    return expenseDao.getExpenseById(id);
+  }
+
+  @DeleteMapping("/{id}")
   public void deleteExpense(@PathVariable int id) {
     expenseDao.deleteExpense(id);
   }

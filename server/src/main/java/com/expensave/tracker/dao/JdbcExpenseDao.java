@@ -66,7 +66,7 @@ public class JdbcExpenseDao implements ExpenseDao {
   }
 
   @Override
-  public void addExpense(Expense expense) {
+  public void createExpense(Expense expense) {
     String sql = "INSERT INTO expenses (user_id, amount, description, date) VALUES (?, ?, ?, ?)";
     try {
       jdbcTemplate.update(sql,

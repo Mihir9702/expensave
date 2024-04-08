@@ -47,7 +47,7 @@
 <script>
 export default {
   props: {
-    addExpense: Function,
+    createExpense: Function,
   },
 
   data() {
@@ -62,7 +62,7 @@ export default {
 
   methods: {
     submitForm() {
-      this.addExpense(this.expenseToAdd);
+      this.createExpense(this.expenseToAdd);
       this.expenseToAdd = {
         date: "",
         description: "",

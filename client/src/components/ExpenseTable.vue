@@ -20,6 +20,7 @@
             Edit
           </button>
           <button
+            @click="deleteExpense(expense.id)"
             class="bg-gray-100 hover:bg-gray-200 shadow-md mx-8 transition-all text-lg w-fit px-5 rounded-md text-black py-1"
           >
             Delete
@@ -34,6 +35,7 @@
 export default {
   props: {
     expenses: Array,
+    deleteExpense: Function,
   },
 };
 </script>
