@@ -10,7 +10,7 @@ export default {
     return axios.get(`/expenses/${id}`)
   },
 
-  createExpense(data) {
+  addExpense(data) {
     return axios.post('/expenses', data)
   },
 

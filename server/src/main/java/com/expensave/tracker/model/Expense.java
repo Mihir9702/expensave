@@ -12,7 +12,8 @@ public class Expense {
   public Expense() {
   }
 
-  public Expense(int userId, double amount, String description, LocalDate date) {
+  public Expense(int id, int userId, double amount, String description, LocalDate date) {
+    this.id = id;
     this.userId = userId;
     this.amount = amount;
     this.description = description;
