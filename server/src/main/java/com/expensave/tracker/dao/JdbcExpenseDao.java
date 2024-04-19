@@ -77,17 +77,6 @@ public class JdbcExpenseDao implements ExpenseDao {
     }
   }
 
-  @Override
-  public void updateExpense(Expense expense) {
-    String sql = "UPDATE expenses SET title = ?, amount = ?, description = ?, date = ? WHERE expense_id = ?";
-    try {
-      jdbcTemplate.update(sql,
-          expense.getAmount(), expense.getDescription(),
-          expense.getDate(), expense.getId());
-    } catch (CannotGetJdbcConnectionException e) {
-      throw new DaoException("Unable to connect to server or database", e);
-    }
-  }
 
   @Override
   public void deleteExpense(int id) {

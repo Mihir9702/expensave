@@ -51,11 +51,6 @@ public class ExpenseController {
     expenseDao.createExpense(expense);
   }
 
-  @PutMapping
-  public void updateExpense(@RequestBody Expense expense) {
-    expenseDao.updateExpense(expense);
-  }
-
   @GetMapping("/{id}")
   public Expense getExpenseById(@PathVariable int id) {
     return expenseDao.getExpenseById(id);

@@ -11,7 +11,5 @@ public interface ExpenseDao {
 
   void createExpense(Expense expense);
 
-  void updateExpense(Expense expense);
-
   void deleteExpense(int id);
 }

@@ -5,6 +5,10 @@
   <div v-else class="flex flex-col items-center">
     <h1 class="text-3xl font-bold mt-4">Expenses</h1>
 
+    <div>
+      <h1>Total Spent: {{ getTotalSpent() }}</h1>
+    </div>
+
     <div class="flex justify-center mt-4">
       <button
         class="bg-white hover:bg-gray-100 shadow-md transition-all text-lg w-fit px-6 rounded-md text-black py-1"
@@ -14,7 +18,7 @@
       </button>
     </div>
 
-    <div v-if="showForm" class="bg-white p-4 rounded-md shadow-md m-4">
+    <div v-if="showCreateForm" class="bg-white p-4 rounded-md shadow-md m-4">
       <ExpenseForm :createExpense="createExpense" />
     </div>
 
@@ -39,7 +43,7 @@ export default {
     return {
       isLoading: true,
       expenses: [],
-      showForm: false,
+      showCreateForm: false,
     };
   },
 
@@ -53,11 +57,15 @@ export default {
       }
     },
 
+    getTotalSpent() {
+      return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+    },
+
     async createExpense(expenseToAdd) {
       try {
         await expenseService.createExpense(expenseToAdd);
         this.expenses = await this.getExpenses();
-        this.showForm = false;
+        this.showCreateForm = false;
       } catch (error) {
         console.error(error);
       }
@@ -71,6 +79,7 @@ export default {
         console.error(error);
       }
     },
+
   },
 
   async created() {
