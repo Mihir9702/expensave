@@ -6,7 +6,7 @@
     <h1 class="text-3xl font-bold mt-4">Expenses</h1>
 
     <div>
-      <h1>Total Spent: {{ getTotalSpent() }}</h1>
+      <h1 class="text-xl my-2">Total Spent: ${{ getTotalSpent() }}</h1>
     </div>
 
     <div class="flex justify-center mt-4">
@@ -18,7 +18,7 @@
       </button>
     </div>
 
-    <div v-if="showCreateForm" class="bg-white p-4 rounded-md shadow-md m-4">
+    <div v-if="showForm" class="bg-white p-4 rounded-md shadow-md m-4">
       <ExpenseForm :createExpense="createExpense" />
     </div>
 
@@ -43,7 +43,7 @@ export default {
     return {
       isLoading: true,
       expenses: [],
-      showCreateForm: false,
+      showForm: false,
     };
   },
 
